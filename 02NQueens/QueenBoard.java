@@ -119,8 +119,8 @@ public class QueenBoard{
     public static void main(String []args){
 	for(int i = 1 ;i < 10; i++){
 	    QueenBoard q = new QueenBoard(i);
-	    q.countSolutions();
-	    System.out.println(q.getCount());
+	    q.solve();
+	    System.out.println(q);
 	    }
 	                                                                                                                                       
     }
