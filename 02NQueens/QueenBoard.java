@@ -21,10 +21,10 @@ public class QueenBoard{
     }
 
     private boolean solveH(int row, int start){
-	if (row >= board.length) return true;
+	if (row >= board.length)return true;
 	if (start < board.length && hasSpot(row,start)!=-1){
 	    addQueen(row, hasSpot(row,start));
-	    return solveH(row + 1,0);
+	    return solveH(row +1,0);
 	
 	}else if(row > 0 && findQueen(row-1)!=-1){
 	    int placeholder = findQueen(row-1);
@@ -78,15 +78,29 @@ public class QueenBoard{
 
     
 
-	
-
+    private void clear(){
+	for (int row = 0; row < board.length; row ++){
+	    for (int col = 0; col < board.length; col ++){
+		board[row][col] = 0;
+	    }
+	}
+    }
     /**
      *@return the number of solutions found, or -1 if the board was never solved.
      *The board should be reset after this is run.    
      */
-    public int getSolutionCount(){
-	return -1;
+    public void countSolutions(){
+	for (int i = 0; i < board.length; i++){
+	    clear();
+	    if (solveH(0,i)) solutionCount += 1;
+	}
+	
     }
+
+    public int getCount(){
+	return solutionCount;
+    }
+
     /**toString
      *and all nunbers that represent queens are replaced with 'Q' 
      *all others are displayed as underscores '_'
@@ -103,10 +117,10 @@ public class QueenBoard{
     }
 
     public static void main(String []args){
-	for(int i = 1 ;i < 20; i++){
-	    QueenBoard q = new QueenBoard(i);   
-	    q.solve();
-	    System.out.println(q);
+	for(int i = 1 ;i < 10; i++){
+	    QueenBoard q = new QueenBoard(i);
+	    q.countSolutions();
+	    System.out.println(q.getCount());
 	    }
 	                                                                                                                                       
     }
