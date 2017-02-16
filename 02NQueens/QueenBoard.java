@@ -90,12 +90,24 @@ public class QueenBoard{
      *The board should be reset after this is run.    
      */
     public void countSolutions(){
-	for (int i = 0; i < board.length; i++){
-	    clear();
-	    if (solveH(0,i)) solutionCount += 1;
-	}
-	
+	countH(0,0);
     }
+    
+    public void countH(int row, int start){
+	addQueen(row, start);
+	if (row+1 >= board.length) solutionCount ++;
+	else{ 
+	    for (int i = 0; i < board.length; i ++){
+		if (hasSpot(row+1, i) != -1) countH(row+1,i);
+	    }
+	}
+	removeQueen(row,start);
+    }
+						   
+	    
+	
+    
+   
 
     public int getCount(){
 	return solutionCount;
@@ -119,8 +131,8 @@ public class QueenBoard{
     public static void main(String []args){
 	for(int i = 1 ;i < 10; i++){
 	    QueenBoard q = new QueenBoard(i);
-	    q.solve();
-	    System.out.println(q);
+	    q.countSolutions();
+	    System.out.println(q.getCount());
 	    }
 	                                                                                                                                       
     }
