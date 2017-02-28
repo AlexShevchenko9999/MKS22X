@@ -32,7 +32,13 @@ public class KnightBoard{
     
     //============================================================================================ 
     public void solve(){
-	solveH(2,2,1);
+	for (int row = 0; row < board.length; row ++){
+            for (int col = 0; col < board[0].length; col++){
+                //System.out.println(row + " " + col);                                                                                                                               
+                if (solveH(row,col,1)) break;
+            }
+        }
+
     }
 
     private boolean solveH(int row ,int col, int level){ // level is the # of the knight
