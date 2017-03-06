@@ -19,12 +19,14 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
 	animate = false;
-	
+	boolean hasE = false;
+	boolean hasS = false;
+
 	try { 
 	    Scanner test = new Scanner (new File(filename));
 	
 
-	    int down=0;
+	    int down=1;
 	    int across=0;
 	    while (test.hasNextLine()){
 		down++;
@@ -42,12 +44,13 @@ public class Maze{
 		//System.out.println(arr[0]);
 		int col = 0;
 		for (char i: arr){
-		    System.out.println(i);
+		    if (i == 'E') hasE = true;
+		    if (i == 'S') hasS = true;
 		    maze[row][col]=i;
 		    col ++;
 		}
-		//System.out.println();
 	    }
+	    if (!hasE || !hasS) System.exit(0);
 	    
 	}catch (FileNotFoundException e){
             e.printStackTrace();
@@ -66,7 +69,7 @@ public class Maze{
     public String toString(){
 	String ans = "";
 	for (int row = 0; row < maze.length; row++){
-	    for (int col = 0; col < maze[row].length; row++){
+	    for (int col = 0; col < maze[row].length; col++){
 		ans += maze[row][col];
 	    }
 	    ans += "\n";
@@ -83,15 +86,20 @@ public class Maze{
 	}
     }
 
+    //===============================================================================================
+
     public void setAnimate(boolean b){
         animate = b;
     }
+
+    //===============================================================================================
 
     public void clearTerminal(){
         //erase terminal, go to top left of screen.
         System.out.println("\033[2J\033[1;1H");
     }
 
+    //===============================================================================================
 
     /*Wrapper Solve Function
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
@@ -102,6 +110,9 @@ public class Maze{
 	maze[startr][startc] = ' ';//erase the S, and start solving!
 	return solve(startr,startc);
     }
+
+    //===============================================================================================
+    
 
     /*
       Recursive Solve function:
