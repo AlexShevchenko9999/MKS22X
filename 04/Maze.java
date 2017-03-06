@@ -147,10 +147,17 @@ public class Maze{
 	    //if (maze[row][col] == '@') maze[row][col] = '.';
 	    if (maze[row][col] == ' '){
 		maze[row][col] = '@';
-		return (solve(row+1, col) || 
-			solve(row-1, col) ||
-			solve(row, col+1) ||
-			solve(row, col-1));
+		if  (solve(row+1, col) || 
+		     solve(row-1, col) ||
+		     solve(row, col+1) ||
+		     solve(row, col-1)) return true;
+		maze[row][col] = '.';
+		/*else { 
+		    return (solve(row+1, col) ||
+			    solve(row-1, col) ||
+			    solve(row, col+1) ||
+			    solve(row, col-1));
+			    }*/
 	    }
 	    
 	    //COMPLETE SOLVE
