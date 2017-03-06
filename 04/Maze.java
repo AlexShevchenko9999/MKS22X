@@ -21,30 +21,32 @@ public class Maze{
 	animate = false;
 	
 	try { 
-	    Scanner sc = new Scanner (new File(filename));
+	    Scanner test = new Scanner (new File(filename));
 	
 
 	    int down=0;
 	    int across=0;
-	    while (sc.hasNextLine()){
+	    while (test.hasNextLine()){
 		down++;
-		if (sc.nextLine().length() > across) across = sc.nextLine().length();
+		if (test.nextLine().length() > across) across = test.nextLine().length();
 	    }
-	    System.out.println(across);
+	    //System.out.println(down);
 	    maze = new char[down][across];
 	    
+	    Scanner sc = new Scanner (new File(filename));
+
 	    for (int row = 0;sc.hasNextLine(); row++){
 		String line = sc.nextLine();
-		System.out.println(line);
+		//System.out.println(line);
 		char[] arr = line.toCharArray();
-		System.out.println(arr[0]);
+		//System.out.println(arr[0]);
 		int col = 0;
 		for (char i: arr){
 		    System.out.println(i);
 		    maze[row][col]=i;
 		    col ++;
 		}
-		System.out.println();
+		//System.out.println();
 	    }
 	    
 	}catch (FileNotFoundException e){
