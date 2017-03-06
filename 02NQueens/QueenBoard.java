@@ -1,6 +1,6 @@
 public class QueenBoard{
     private int[][]board;
-    private int solutionCount;
+    private int solutionCount=-1;
     
     public QueenBoard(int size){
 	board = new int[size][size];
