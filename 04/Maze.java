@@ -5,6 +5,7 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;
+    private int startr = -1, startc = -1;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -19,29 +20,22 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
 	animate = false;
-	boolean hasE = false;
-	boolean hasS = false;
-
+	boolean hasS = false, hasE = false;
 	try { 
 	    Scanner test = new Scanner (new File(filename));
-	
-
 	    int down=1;
 	    int across=0;
 	    while (test.hasNextLine()){
 		down++;
 		if (test.nextLine().length() > across) across = test.nextLine().length();
 	    }
-	    //System.out.println(down);
+  
 	    maze = new char[down][across];
 	    
 	    Scanner sc = new Scanner (new File(filename));
-
 	    for (int row = 0;sc.hasNextLine(); row++){
 		String line = sc.nextLine();
-		//System.out.println(line);
 		char[] arr = line.toCharArray();
-		//System.out.println(arr[0]);
 		int col = 0;
 		for (char i: arr){
 		    if (i == 'E') hasE = true;
@@ -105,10 +99,22 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public boolean solve(){
-	int startr=-1,startc=-1;
+	findS();
 	//Initialize starting row and startint col with the location of the S. 
 	maze[startr][startc] = ' ';//erase the S, and start solving!
 	return solve(startr,startc);
+    }
+
+
+    private void findS (){
+	for (int row = 0; row < maze.length; row++){
+	    for (int col = 0; col < maze[row].length; col ++){
+		if (maze[row][col] == 'S'){
+		    startr = row;
+		    startc = col;
+		}
+	    }
+	}
     }
 
     //===============================================================================================
@@ -132,13 +138,29 @@ public class Maze{
             System.out.println("\033[2J\033[1;1H"+this);
             wait(20);
         }
-
-        //COMPLETE SOLVE
+	if (row >= 0 && 
+	    row < maze.length && 
+	    col >= 0 && 
+	    col < maze[row].length){ 
+	    
+	    if (maze[row][col] == 'E') return true;
+	    //if (maze[row][col] == '@') maze[row][col] = '.';
+	    if (maze[row][col] == ' '){
+		maze[row][col] = '@';
+		return (solve(row+1, col) || 
+			solve(row-1, col) ||
+			solve(row, col+1) ||
+			solve(row, col-1));
+	    }
+	    
+	    //COMPLETE SOLVE
+	}
         return false; //so it compiles
     }
 
     public static void main(String[] args){
 	Maze m = new Maze ("data1.dat");
+	System.out.println(m.solve());
 	System.out.println(m);
 
     }
