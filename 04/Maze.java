@@ -18,7 +18,60 @@ public class Maze{
     */
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
+	animate = false;
+	
+	try { 
+	    Scanner sc = new Scanner (new File(filename));
+	
+
+	    int down=0;
+	    int across=0;
+	    while (sc.hasNextLine()){
+		down++;
+		if (sc.nextLine().length() > across) across = sc.nextLine().length();
+	    }
+	    System.out.println(across);
+	    maze = new char[down][across];
+	    
+	    for (int row = 0;sc.hasNextLine(); row++){
+		String line = sc.nextLine();
+		System.out.println(line);
+		char[] arr = line.toCharArray();
+		System.out.println(arr[0]);
+		int col = 0;
+		for (char i: arr){
+		    System.out.println(i);
+		    maze[row][col]=i;
+		    col ++;
+		}
+		System.out.println();
+	    }
+	    
+	}catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+
     }
+	/*for (int col = 0;line.hasNext(); col++){
+	    maze[row][col] = line.next().toCharArray();
+	    //System.out.println(line.next());
+	    }*/
+
+    //===============================================================================================
+
+    public String toString(){
+	String ans = "";
+	for (int row = 0; row < maze.length; row++){
+	    for (int col = 0; col < maze[row].length; row++){
+		ans += maze[row][col];
+	    }
+	    ans += "\n";
+	}
+	return ans;
+    }
+    //=============================================================================================== 
     
     private void wait(int millis){ //ADDED SORRY!
 	try {
@@ -71,4 +124,9 @@ public class Maze{
         return false; //so it compiles
     }
 
+    public static void main(String[] args){
+	Maze m = new Maze ("data1.dat");
+	System.out.println(m);
+
+    }
 }
