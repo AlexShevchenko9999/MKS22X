@@ -6,7 +6,7 @@ public class USACO {
     private int ROW,COL;
 
 
-    public void bronze (String filename) {
+    /*public void bronze (String filename) {
 	try {
 	    Scanner lakeScan = new Scanner(new File(filename));
 	    int i = 0;
@@ -29,7 +29,7 @@ public class USACO {
 	}
     }
 
-    /*
+    
       [4, 6, 22, 2]
       
           0   1   2   3   4   5
@@ -42,7 +42,29 @@ public class USACO {
       [1, 1, 10]
      */
     
-    public int solveB(){
+    public int solveB(String filename){
+	try {
+            Scanner lakeScan = new Scanner(new File(filename));
+            int i = 0;
+            while (lakeScan.hasNextLine()) {
+                lakeScan.nextLine();
+                i++;
+            }
+            lake = new int[i][];
+            lakeScan = new Scanner(new File(filename));
+            for (int j = 0; j < lake.length; j++) {
+                String lakeScanLine = lakeScan.nextLine();
+                lake[j] = StringtoInt(lakeScanLine.split(" "));
+            }
+            ROW = lake[0][0];
+            COL = lake[0][1];
+        }
+	catch (FileNotFoundException e) {
+            System.out.println("Lake not found! Please insert a valid lake file!");
+            System.exit(1);
+        }
+	//=======================================================================
+
 	for (int set = 1; set <= lake[0][3]; set ++){
 	    int startRow = lake[ROW + set][0];
 	    int startCol = lake[ROW + set][1] - 1;
@@ -105,8 +127,7 @@ public class USACO {
 
     public static void main(String[] args) {
         USACO l = new USACO();
-	l.bronze(args[0]);
 	//for (int[] i : l.lake) System.out.println(Arrays.toString(i));
-	System.out.println(l.solveB());
+	System.out.println(l.solveB(args[0]));
     }
 }
