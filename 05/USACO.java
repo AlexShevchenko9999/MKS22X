@@ -5,31 +5,11 @@ public class USACO {
     private int[][] lake;
     private int ROW,COL;
 
+    //BRONZE================================================================================================================== 
+    //BRONZE================================================================================================================== 
+    //BRONZE================================================================================================================== 
 
-    /*public void bronze (String filename) {
-	try {
-	    Scanner lakeScan = new Scanner(new File(filename));
-	    int i = 0;
-	    while (lakeScan.hasNextLine()) {
-		lakeScan.nextLine();
-		i++;
-	    }
-	    lake = new int[i][];
-	    lakeScan = new Scanner(new File(filename));
-	    for (int j = 0; j < lake.length; j++) {
-		String lakeScanLine = lakeScan.nextLine();
-		lake[j] = StringtoInt(lakeScanLine.split(" "));
-	    }
-	    ROW = lake[0][0];
-	    COL = lake[0][1];
-	}
-	catch (FileNotFoundException e) {
-	    System.out.println("Lake not found! Please insert a valid lake file!");
-	    System.exit(1);
-	}
-    }
-
-    
+    /*
       [4, 6, 22, 2]
       
           0   1   2   3   4   5
@@ -40,7 +20,7 @@ public class USACO {
       
       [1, 4, 4]
       [1, 1, 10]
-     */
+    */
     
     public int solveB(String filename){
 	try {
@@ -114,7 +94,112 @@ public class USACO {
 		if (row < (r + 3) && col < (c + 3) && lake[row][col] == max) lake[row][col] --;
 	    }
 	}
-    }    
+    }
+
+    //SILVER==================================================================================================================
+    //SILVER================================================================================================================== 
+    //SILVER================================================================================================================== 
+    //SILVER================================================================================================================== 
+
+    /*
+      4 5 6
+      ...*.
+      ...*.
+      .....
+      .....
+      1 3 1 5
+    */
+
+    private int[][] field;
+    private int N,M,T,R1,C1,R2,C2;
+    private int[][] placeHolder;
+    /*
+      N = 4;
+      M = 5;
+      T = 6;
+      R1 = 1, C1 = 3;
+      R2 = 1, C2 = 5;
+     */
+    
+
+    public int silver(String filename){
+	try {
+            Scanner inScan = new Scanner(new File(filename));
+            Scanner firstLine = new Scanner(inScan.nextLine());
+	    N = Integer.parseInt(firstLine.next());
+	    M = Integer.parseInt(firstLine.next());
+	    T = Integer.parseInt(firstLine.next());
+	    field = new int[N][M];
+	    for (int row = 0; row < N; row++){
+		Scanner line = new Scanner(inScan.nextLine());
+		line.useDelimiter("");
+		for (int col = 0; col < M;col++){
+		    if (line.next().equals(".")) field[row][col] = 0;
+		    else field[row][col] = -1;
+		}
+	    }
+	    Scanner lastLine = new Scanner(inScan.nextLine());
+	    //String lastLine = inScan.nextLine();
+	    System.out.println(fieldToString());
+	    R1 = Integer.parseInt(lastLine.next());
+	    C1 = Integer.parseInt(lastLine.next());
+	    R2 = Integer.parseInt(lastLine.next());
+	    C2 = Integer.parseInt(lastLine.next());
+	    field[R1-1][C1-1] =1;
+	    placeHolder = new int[N][M];
+	    toPlace();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Lake not found! Please insert a valid lake file!");
+            System.exit(1);
+        }
+	//=======================================================================================
+	return solveSilver();
+	
+    }
+
+    private void toPlace(){
+	for (int r = 0; r < N; r ++){
+	    for (int c = 0; c < M; c++){
+		placeHolder[r][c] = field[r][c];
+	    }
+	}
+    }
+
+    private void toField(){
+	for (int r = 0;r < N; r ++){
+            for(int c = 0; c <M; c++){
+		field[r][c] = placeHolder[r][c];
+            }
+	}
+    }
+
+    private int solveSilver(){
+	while (T > 0){
+	    for (int row = 0; row < N; row ++){
+		for (int col = 0; col < M ; col++){
+		    //if (field[row][col] == 0) add(row,col);
+		    //else if (field[row][col] != -1) field[row][col] = 0;
+		    if (field[row][col] != -1) add(row,col);
+		    System.out.println(fieldToString());
+		}
+	    }
+	    toField();
+	    T--;
+	}
+	System.out.println(fieldToString());
+	return field[R2-1][C2-1];
+    }
+
+    private void add( int r, int c){
+	placeHolder[r][c] = 0;
+	if (r + 1 < N && field[r+1][c]!=-1) placeHolder[r][c] += field[r+1][c];
+	if (r - 1 >= 0 && field[r-1][c]!=-1) placeHolder[r][c] += field[r-1][c];
+	if (c + 1 < M && field[r][c+1]!=-1) placeHolder[r][c] += field[r][c+1];
+	if (c - 1 >- 0 && field[r][c-1]!=-1) placeHolder[r][c] += field[r][c-1];
+    }
+
+	    
 
     private static int[] StringtoInt(String[] str) {
 	int[] ans = new int[str.length];
@@ -123,11 +208,21 @@ public class USACO {
     }
 
     
-	
+    private String fieldToString(){
+	String ans = "";
+	for (int r = 0; r < N; r ++){
+	    for (int c = 0; c < M; c ++){
+		ans += field[r][c] + " ";
+	    }
+	    ans += "\n";
+	}
+	return ans;
+    }
 
     public static void main(String[] args) {
-        USACO l = new USACO();
+	//        USACO l = new USACO();
+	
 	//for (int[] i : l.lake) System.out.println(Arrays.toString(i));
-	System.out.println(l.solveB(args[0]));
+	//System.out.println(l.silver(args[0]));
     }
 }
