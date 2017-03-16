@@ -1,6 +1,8 @@
 import java.util.*;
 public class Quick{
 
+    
+
     public static int part ( int [] data, int start, int end){
 	//-Choose a random element to be a pivot, and partition the array around it. 
 	//-Only partition the elements from start to end inclusive.
@@ -8,7 +10,7 @@ public class Quick{
 	//    (Should be from start to end inclusive)
 	Random rand = new Random();
 	int pivot = rand.nextInt(end-start+1) + start;
-	System.out.println(pivot);
+	//System.out.println(pivot);
 	for (int i = start; i < end; i++){
 	    if (i < pivot && data[i] > data[pivot]){
 		int placeHolder = data[i];
@@ -25,13 +27,23 @@ public class Quick{
 	}
 	return pivot;
     }
+    
 
 
-    public static void quickselect(int []data, int k){
+    public static int quickselect(int []data, int k){
 	//return the value that is the kth smallest value of the array. 
 	//use your partition method to help you accomplish this.
-	
+	int var = part(data, 0, data.length - 1);
+	while (k != var){
+	    if (var > k) var = part(data, 0, var);
+	    if (var < k) var = part(data, var+1,data.length-1);
+	}
+	return data[k];
     }
+
+
+
+
 
     public static void main (String [] args){
 	int [] ar = new int[10];
@@ -42,9 +54,12 @@ public class Quick{
 	    s += ar[i]+",";
 	}
 	System.out.println(s);
-	System.out.println(part(ar, 0, 9));
+	System.out.println(quickselect(ar,5));
 	String d = "";
 	for (int i = 0; i < ar.length; i++) d += ar[i]+",";
 	System.out.println(d);
+
+
+
     }
 }
