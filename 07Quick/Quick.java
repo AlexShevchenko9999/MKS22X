@@ -8,11 +8,10 @@ public class Quick{
 	//use your partition method to help you accomplish this.
 	int var = part(data, 0, data.length - 1);
 	while (k != var){
-	    System.out.println("Var:" + var);
-	    System.out.println(arr(data));
 	    if (var > k) var = part(data, 0, var);
 	    if (var < k) var = part(data, var+1,data.length-1);
 	}
+	
 	return data[k];
     }
 
@@ -21,9 +20,7 @@ public class Quick{
         int pivot = r.nextInt(end-start) + start;
         int v = data[pivot];
         int i = start+1;
-        System.out.println("Pivot: " + pivot + "\n V: " + v + "\n");
         swap(data, pivot, start);
-        //System.out.println(arr(data));                                                                                                                                             
         while (i<=end){
             if (data[i]==v) i++;
             else if (data[i]<v){
@@ -35,14 +32,17 @@ public class Quick{
                 swap(data,end,i);
                 end--;
             }
-            //System.out.println(arr(data));                                                                                                                                         
-        }
-        //System.out.println(arr(data));                                                                                                                                             
+                                                                                                                                                     
+        }                                                                                                                                             
 	return (start + end)/2;
     }
 
 
     //===================================================================================================
+
+    public static void quicksort(int []data){
+        partition(data, 0, data.length-1);
+    }
 
     public static void partition(int []data, int start, int end){
 	if (end - start > 1){
@@ -87,41 +87,21 @@ public class Quick{
 	return ans;
     }
 
-    //QUICKSORT==========================================================================================
-    //QUICKSORT==========================================================================================  
-    //QUICKSORT==========================================================================================  
-
-
-    public static void quicksort(int []data){
-	partition(data, 0, data.length-1);
-	System.out.println(arr(data));
-    } 
-
-
-
-
-
     //============================================
 
     public static void main (String [] args){
-	int [] ar = new int[100];
+	/*
+	int [] ar = new int[20];
 	String s = "";
 	Random r = new Random();
 	for (int i = 0; i < ar.length; i++){
-	    ar[i] = r.nextInt(3);
+	    ar[i] = r.nextInt(8);
 	    s += ar[i]+",";
 	}
-
-	
 	System.out.println("Originals Arr \n" + s + "\n");
-	//System.out.println(quickselect(ar,4));
-	//String d = "";
-	//for (int i = 0; i < ar.length; i++) d += ar[i]+",";
-	//System.out.println(d);
-
-
+	System.out.println(quickselect(ar,8));
 	quicksort(ar);
-	
+	*/
 
     }
 }
