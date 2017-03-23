@@ -50,13 +50,9 @@ public class Quick{
 	    int pivot = r.nextInt(end-start) + start;
 	    int v = data[pivot];
 	    int i = start+1;
-	    
 	    int origin = start;
 	    int finish = end;
-	    
-	    //System.out.println("Pivot: " + pivot + "\n V: " + v + "\n");
 	    swap(data, pivot, start);
-	    //System.out.println(arr(data));
 	    while (i<=end){
 		if (data[i]==v) i++;
 		else if (data[i]<v){
@@ -68,14 +64,10 @@ public class Quick{
 		    swap(data,end,i);
 		    end--;
 		}
-	    System.out.println(arr(data));
-	    }
-	    
+	     }
 	    partition(data, origin, start);
 	    partition(data, end, finish);
-	    
 	}
-	//System.out.println(arr(data));
     }
     
 
@@ -112,7 +104,7 @@ public class Quick{
     //============================================
 
     public static void main (String [] args){
-	int [] ar = new int[1000];
+	int [] ar = new int[100];
 	String s = "";
 	Random r = new Random();
 	for (int i = 0; i < ar.length; i++){
