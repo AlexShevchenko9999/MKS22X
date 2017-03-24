@@ -169,6 +169,11 @@ public class Maze{
 	Maze m = new Maze ("data1.dat");
 	System.out.println(m.solve());
 	System.out.println(m);
-
+	Maze m1 = new Maze("data2.dat");
+	m1.solve();
+	System.out.println(m1);
+	Maze m2 = new Maze("data3.dat");
+	m2.solve();
+	System.out.println(m2);
     }
 }
