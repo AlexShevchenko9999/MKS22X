@@ -22,7 +22,7 @@ public class USACO {
       [1, 1, 10]
     */
     
-    public int solveB(String filename){
+    public int bronze(String filename){
 	try {
             Scanner lakeScan = new Scanner(new File(filename));
             int i = 0;
@@ -140,7 +140,7 @@ public class USACO {
 	    }
 	    Scanner lastLine = new Scanner(inScan.nextLine());
 	    //String lastLine = inScan.nextLine();
-	    System.out.println(fieldToString());
+	    //System.out.println(fieldToString());
 	    R1 = Integer.parseInt(lastLine.next());
 	    C1 = Integer.parseInt(lastLine.next());
 	    R2 = Integer.parseInt(lastLine.next());
@@ -181,13 +181,13 @@ public class USACO {
 		    //if (field[row][col] == 0) add(row,col);
 		    //else if (field[row][col] != -1) field[row][col] = 0;
 		    if (field[row][col] != -1) add(row,col);
-		    System.out.println(fieldToString());
+		    //System.out.println(fieldToString());
 		}
 	    }
 	    toField();
 	    T--;
 	}
-	System.out.println(fieldToString());
+	//System.out.println(fieldToString());
 	return field[R2-1][C2-1];
     }
 
@@ -220,9 +220,9 @@ public class USACO {
     }
 
     public static void main(String[] args) {
-	//        USACO l = new USACO();
+	USACO l = new USACO();
 	
 	//for (int[] i : l.lake) System.out.println(Arrays.toString(i));
-	//System.out.println(l.silver(args[0]));
+	System.out.println(l.bronze(args[0]));
     }
 }
