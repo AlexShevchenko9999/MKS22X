@@ -4,19 +4,20 @@ public class Quick{
     //==================================================================================================
 
     public static int quickselect(int []data, int k){
-	//return the value that is the kth smallest value of the array. 
-	//use your partition method to help you accomplish this.
-	int var = part(data, 0, data.length - 1);
-	while (k != var){
-	    if (var > k) var = part(data, 0, var);
-	    if (var < k) var = part(data, var+1,data.length-1);
+	return quickselectH(data,k,0,data.length-1);
+    }
+
+    public static int quickselectH(int []data, int k, int start, int end){
+	int var = part(data, start, end);
+	if (var == k) return data[k];
+	else {
+	    if (var > k) return quickselectH(data,k,start, var);
+	    return quickselectH(data,k, var+1,data.length-1);
 	}
-	
-	return data[k];
     }
 
     private static int part(int []data, int start, int end){
-        Random r = new Random();
+	Random r = new Random();
         int pivot = r.nextInt(end-start) + start;
         int v = data[pivot];
         int i = start+1;
@@ -33,7 +34,7 @@ public class Quick{
                 end--;
             }
                                                                                                                                                      
-        }                                                                                                                                             
+        }                                                                                                                           
 	return (start + end)/2;
     }
 
@@ -91,7 +92,7 @@ public class Quick{
 
     public static void main (String [] args){
 	/*
-	int [] ar = new int[20];
+	int [] ar = new int[100];
 	String s = "";
 	Random r = new Random();
 	for (int i = 0; i < ar.length; i++){
@@ -99,8 +100,9 @@ public class Quick{
 	    s += ar[i]+",";
 	}
 	System.out.println("Originals Arr \n" + s + "\n");
-	System.out.println(quickselect(ar,8));
+	System.out.println(quickselect(ar,24));
 	quicksort(ar);
+	System.out.println("Sorted: " + arr(ar));
 	*/
 
     }
