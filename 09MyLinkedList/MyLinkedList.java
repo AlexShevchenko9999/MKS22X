@@ -38,13 +38,8 @@ public class MyLinkedList{
 	    end = te;
 	    size++;
 	    return;
-	    
 	}
-	LNode Node = start;
-	while (index > 0){
-	    Node = Node.getNext();
-	    index--;
-	}
+	LNode Node = getNode(index);
 	LNode next = new LNode(value,Node,Node.getPrevious());
 	next.getPrevious().setNext(next);
 	next.getNext().setPrevious(next);
@@ -55,28 +50,13 @@ public class MyLinkedList{
     //GET========================================
 
     public int get(int index){
-	if (index < 0 || index >= size){
-            throw new IndexOutOfBoundsException();
-        }
-	LNode node = start;
-	while (index > 0){
-	    node = node.getNext();
-	    index--;
-	}
-	return node.getValue();
+	return getNode(index).getValue();
     }
 
     //SET=======================================
 
     public int set(int index, int NewValue){
-	if (index < 0 || index >= size){
-            throw new IndexOutOfBoundsException();
-        }
-	LNode node = start;
-	while (index > 0){
-	    node = node.getNext();
-	    index--;
-	}
+	LNode node = getNode(index);
 	int ans = node.getValue();
 	node.setValue(NewValue);
 	return ans;
@@ -100,10 +80,20 @@ public class MyLinkedList{
             throw new IndexOutOfBoundsException();
         }
 	LNode node = start;
-	while (index > 0){
-            node = node.getNext();
-            index--;
-        }
+	if (index < size/2){   
+	    while (index > 0){
+		node = node.getNext();
+		index--;
+	    }
+	}
+	else {
+	    node = end;
+	    int i = size-1;
+	    while (i>index ){
+		node = node.getPrevious();
+		i--;
+	    }
+	}
 	return node;
     }
 
@@ -169,9 +159,9 @@ public class MyLinkedList{
 	System.out.println(L);
 	L.add(2,2);
 	System.out.println(L);
-	L.add(4,4);
+	L.add(2,4);
 	System.out.println(L);
-	System.out.println("Set: " + L.set(0,10));
+	System.out.println("Set: " + L.set(4,10));
 	System.out.println(L);
 	System.out.println("Index: " + L.indexOf(5678));
 	System.out.println(L);
@@ -181,6 +171,7 @@ public class MyLinkedList{
 	L.add(13);
 	L.add(28);
 	System.out.println(L);
+	System.out.println(L.get(5));
 	System.out.println(L.indexOf(13));
 	System.out.println(L.remove(4));
 	System.out.println(L);
