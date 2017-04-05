@@ -11,37 +11,43 @@ public class MyLinkedList{
     //ADD=========================================
 
     public boolean add(int value){
-	if (size == 0){
-	    start = end = new LNode(value);
-	}
-	else {
-	    LNode next = new LNode(value);
-	    end.setNext(next);
-	    end = end.getNext();
-	} 
-	size++;
+	add(size,value);
 	return true;
     }
 
     public void add(int index, int value){
 	if (index < 0 || index > size){
+	    System.out.println("" + index + " " + size);
 	    throw new IndexOutOfBoundsException();
 	}
 	if (size == 0) {
 	    start = end = new LNode(value);
+	    size++;
 	    return;
 	}
-	if (index == 0){ 
-	    start = new LNode(value,start);
+	if (index == 0){
+	    LNode temp = new LNode(value,start);
+	    start.setPrevious(temp);
+	    start = temp;
+	    size++;
 	    return;
-	}	    
+	}	
+	if (index == size){
+	    LNode te = new LNode(value,null,end);
+	    end.setNext(te);
+	    end = te;
+	    size++;
+	    return;
+	    
+	}
 	LNode Node = start;
-	while (index > 1){
+	while (index > 0){
 	    Node = Node.getNext();
 	    index--;
 	}
-	LNode next = new LNode(value,Node.getNext());
-	Node.setNext(next);
+	LNode next = new LNode(value,Node,Node.getPrevious());
+	next.getPrevious().setNext(next);
+	next.getNext().setPrevious(next);
 	size++;
 		     
     }
@@ -87,21 +93,52 @@ public class MyLinkedList{
 	return -1;
     }
 
+    //Nth NODE==================================
+
+    private LNode getNode(int index){
+	if (index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+	LNode node = start;
+	while (index > 0){
+            node = node.getNext();
+            index--;
+        }
+	return node;
+    }
+
     //REMOVE=====================================
 
     public int remove(int index){
 	if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
-	LNode node = start;
-	while (index > 1){
-	    node = node.getNext();
-	    index--;
+	if (index == 0){
+	    int ans = start.getValue();
+	    start = start.getNext();
+	    start.setPrevious(null);
+	    size--;
+	    return ans;
 	}
-	int ans = node.getNext().getValue();
-	node.setNext(node.getNext().getNext());
-	return ans;
+	if (index == size-1){
+	    int ans = end.getValue();
+	    end = end.getPrevious();
+	    end.setNext(null);
+	    size--;
+	    return ans;
+	}
+	return remove(getNode(index));
     }
+
+    private int remove(LNode node){
+	node.getPrevious().setNext(node.getNext());
+	node.getNext().setPrevious(node.getPrevious());
+	size--;
+	return node.getValue();
+    }
+
+
+
 
     //TOSTRING===================================
     
@@ -115,22 +152,37 @@ public class MyLinkedList{
 	return ans+"]";
     }
 
+    //SIZE=======================================
+
     public int size(){
 	return size;
     }
 
     public static void main (String [] args){
 	MyLinkedList L = new MyLinkedList();
-	L.add(0);
+	//L.add(0);
+	L.add(0,2345);
+	System.out.println(L);
+	//System.out.println(L.remove(0));
 	L.add(1);
 	L.add(3);
+	System.out.println(L);
 	L.add(2,2);
-	L.add(1,4);
+	System.out.println(L);
+	L.add(4,4);
 	System.out.println(L);
 	System.out.println("Set: " + L.set(0,10));
 	System.out.println(L);
 	System.out.println("Index: " + L.indexOf(5678));
-	System.out.println("Remove: "+ L.remove(2));
+	System.out.println(L);
+	System.out.println("Remove: "+ L.remove(4));
+	System.out.println(L);
+	L.add(8);
+	L.add(13);
+	L.add(28);
+	System.out.println(L);
+	System.out.println(L.indexOf(13));
+	System.out.println(L.remove(4));
 	System.out.println(L);
     }
 
@@ -140,16 +192,23 @@ public class MyLinkedList{
 
     class LNode{
 	int value;
-	LNode next;
+	LNode next,previous;
 
 	public LNode(int value){
 	    this.value = value;
 	    next = null;
+	    previous = null;
 	}
 
 	public LNode(int value, LNode next){
 	    this.value = value;
 	    this.next = next;
+	}
+
+	public LNode(int value,LNode next, LNode prev){
+	    this.value = value;
+	    this.next = next;
+	    previous = prev;
 	}
 
 	public void setValue(int value){
@@ -160,12 +219,20 @@ public class MyLinkedList{
 	    this.next = next;
 	} 
 
+	public void setPrevious(LNode prev){
+	    previous = prev;
+	}
+
 	public int getValue(){
 	    return value;
 	}
 
 	public LNode getNext(){
 	    return next;
+	}
+
+	public LNode getPrevious(){
+	    return previous;
 	}
 	
     }
