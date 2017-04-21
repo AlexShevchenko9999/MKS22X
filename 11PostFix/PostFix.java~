@@ -1,0 +1,25 @@
+public class PostFix{
+    
+    public static double eval(String s){
+	return 2.0;
+    }
+    
+    private static double apply(String op, String second, String first){
+	if (op.equals("*")) return Double.parseDouble(first) * Double.parseDouble(second);
+	else if (op.equals("/")) return Double.parseDouble(first) / Double.parseDouble(second);
+	else if(op.equals("+")) return Double.parseDouble(first) + Double.parseDouble(second);
+	else if(op.equals("-")) return Double.parseDouble(first) - Double.parseDouble(second);
+	else if(op.equals("%")) return Double.parseDouble(first) % Double.parseDouble(second);
+	else throw new IllegalArgumentException();
+    }
+
+    private static booleanOp(String op){
+	if (op.equals("*") || 
+	    op.equals("/") ||
+	    op.equals("+") ||
+	    op.equals("-") ||
+	    op.equals("%")  ) return true;
+	else return false;
+    }
+
+}
