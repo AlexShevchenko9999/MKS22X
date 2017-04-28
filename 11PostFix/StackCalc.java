@@ -1,5 +1,5 @@
 import java.util.*;
-public class PostFix{
+public class StackCalc{
     
     public static double eval(String s){
 	String [] tokens = s.split(" ");
@@ -13,7 +13,7 @@ public class PostFix{
     
     private static double apply(String op, Double second, Double first){
 	if (op.equals("*")) return first * second;
-	else if (op.equals("/")) return first / second;
+	else if(op.equals("/")) return first / second;
 	else if(op.equals("+")) return first + second;
 	else if(op.equals("-")) return first - second;
 	else if(op.equals("%")) return first % second;
