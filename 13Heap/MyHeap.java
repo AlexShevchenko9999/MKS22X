@@ -2,7 +2,7 @@ import java.util.*;
 public class MyHeap{
     private int size;
     private ArrayList<String> heap; 
-    private int mix=-1;
+    private int mix=1;
 
     public MyHeap(){
 	size = 0;
@@ -12,7 +12,7 @@ public class MyHeap{
 
     public MyHeap(boolean boo){
 	this();
-	if (boo) mix = 1;
+	if (!boo) mix = -1;
     }
 
     public void add(String s){
@@ -23,7 +23,7 @@ public class MyHeap{
 
     private void pushUp(int index){
 	if (index > 1){
-	    if (mix*(heap.get(index).compareTo(heap.get(index/2))) < 0){
+	    if (mix*(heap.get(index).compareTo(heap.get(index/2))) > 0){
 		//System.out.println(heap.get(index).compareTo(heap.get(index/2)));
 		String repl = heap.get(index);
 		heap.set(index,heap.get(index/2));
@@ -36,12 +36,14 @@ public class MyHeap{
     public String remove(){
 	String repl = heap.get(1);
 	heap.set(1,heap.get(size));
-
+	size--;
+	pushDown(1);
 	return repl;
     }
 
     private void pushDown(int index){
-	if (index < (int)Math.pow(Math.log(size)/Math.log(2),2)){
+	System.out.println(Math.pow((int)(Math.log(size)/Math.log(2)),2));
+	if (index < Math.pow((int)(Math.log(size)/Math.log(2)),2)){
 	    int big = getMax(index);
 	    if (mix*(heap.get(index).compareTo(heap.get(big))) < 0){
 		swap(index,big);
@@ -85,7 +87,9 @@ public class MyHeap{
 	h.add("y");
 	h.add("A");
 	h.add("c");
+	System.out.println(h);
 	h.remove();
+	System.out.println(h);
 	System.out.println(h.remove());
 	System.out.println(h);
     }
