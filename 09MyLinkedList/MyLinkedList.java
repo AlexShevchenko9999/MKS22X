@@ -149,32 +149,7 @@ public class MyLinkedList{
     }
 
     public static void main (String [] args){
-	MyLinkedList L = new MyLinkedList();
-	//L.add(0);
-	L.add(0,2345);
-	System.out.println(L);
-	//System.out.println(L.remove(0));
-	L.add(1);
-	L.add(3);
-	System.out.println(L);
-	L.add(2,2);
-	System.out.println(L);
-	L.add(2,4);
-	System.out.println(L);
-	System.out.println("Set: " + L.set(4,10));
-	System.out.println(L);
-	System.out.println("Index: " + L.indexOf(5678));
-	System.out.println(L);
-	System.out.println("Remove: "+ L.remove(4));
-	System.out.println(L);
-	L.add(8);
-	L.add(13);
-	L.add(28);
-	System.out.println(L);
-	System.out.println(L.get(5));
-	System.out.println(L.indexOf(13));
-	System.out.println(L.remove(4));
-	System.out.println(L);
+	
     }
 
     //LNODE===================================================================================================
