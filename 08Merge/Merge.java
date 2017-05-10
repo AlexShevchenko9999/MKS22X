@@ -17,8 +17,8 @@ public class Merge{
     
     private static void merge(int []left, int[]right, int []a){
 	clear(a);
-	System.out.println("Left: " + arr(left));
-        System.out.println("Right: "+arr(right));
+	//System.out.println("Left: " + arr(left));
+        //System.out.println("Right: "+arr(right));
 	int aIndex = 0;
 	int rightIndex = 0;
 	int leftIndex = 0;
@@ -32,10 +32,10 @@ public class Merge{
 		rightIndex++;
 	    }
 	    aIndex++;
-	    System.out.println("After " + aIndex + "run  "  + arr(a));
+	    //System.out.println("After " + aIndex + "run  "  + arr(a));
 	}
 	//System.out.println("After first run: " + arr(a));
-	System.out.println("Right Index: " + rightIndex );
+	//System.out.println("Right Index: " + rightIndex );
 	while (leftIndex < left.length){
 	    a[aIndex] = left[leftIndex];
 	    aIndex++;
@@ -47,7 +47,7 @@ public class Merge{
             rightIndex++;
         }
 
-	System.out.println("mergeH: " + arr(a));
+	//System.out.println("mergeH: " + arr(a));
     }
 
     private static void clear(int [] a){
@@ -63,11 +63,11 @@ public class Merge{
     }
 
     public static void main(String []args){
-	int [] ar = new int[5];
+	int [] ar = new int[4567];
         String s = "";
         Random r = new Random();
         for (int i = 0; i < ar.length; i++){
-            ar[i] = r.nextInt(8);
+            ar[i] = r.nextInt(10);
             s += ar[i]+",";
         }
 	System.out.println("Originals Arr \n" + s + "\n");
