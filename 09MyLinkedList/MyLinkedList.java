@@ -1,4 +1,5 @@
-public class MyLinkedList{
+import java.util.*;
+public class MyLinkedList implements Iterable<Integer> {
 
     LNode start,end;
     int size;
@@ -7,6 +8,15 @@ public class MyLinkedList{
 	start = end = null;
 	size = 0;
     }
+
+    public Iterator<Integer> iterator(){
+	return new LinkedIterator();
+    }
+
+    public LNode getStart(){
+	return start;
+    }
+    
 
     //ADD=========================================
 
@@ -165,11 +175,15 @@ public class MyLinkedList{
 	System.out.println(L);
 	System.out.println("Index: " + L.indexOf(5678));
 	System.out.println(L);
-	System.out.println("Remove: "+ L.remove(4));
+	System.out.println("Remove: "+ L.remove(0));
 	System.out.println(L);
 	L.add(8);
 	L.add(13);
 	L.add(28);
+	Iterator itr = L.iterator();
+	while (itr.hasNext()){
+	    System.out.println(itr.next());
+	}
 	System.out.println(L);
 	System.out.println(L.get(5));
 	System.out.println(L.indexOf(13));
@@ -224,6 +238,27 @@ public class MyLinkedList{
 
 	public LNode getPrevious(){
 	    return previous;
+	}
+	
+    }
+
+   
+    class LinkedIterator implements Iterator<Integer>{
+	MyLinkedList link;
+	LNode current;
+
+	public LinkedIterator(){
+	    current = getStart();
+	}
+
+	public boolean hasNext(){
+	    return (current != null);
+	}
+
+	public Integer next(){
+	    LNode repl = current;
+	    current = current.getNext();
+	    return repl.getValue();
 	}
 	
     }
