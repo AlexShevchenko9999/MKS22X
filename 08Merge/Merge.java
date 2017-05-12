@@ -17,8 +17,6 @@ public class Merge{
     
     private static void merge(int []left, int[]right, int []a){
 	clear(a);
-	//System.out.println("Left: " + arr(left));
-        //System.out.println("Right: "+arr(right));
 	int aIndex = 0;
 	int rightIndex = 0;
 	int leftIndex = 0;
@@ -34,8 +32,6 @@ public class Merge{
 	    aIndex++;
 	    //System.out.println("After " + aIndex + "run  "  + arr(a));
 	}
-	//System.out.println("After first run: " + arr(a));
-	//System.out.println("Right Index: " + rightIndex );
 	while (leftIndex < left.length){
 	    a[aIndex] = left[leftIndex];
 	    aIndex++;
@@ -46,8 +42,6 @@ public class Merge{
             aIndex++;
             rightIndex++;
         }
-
-	//System.out.println("mergeH: " + arr(a));
     }
 
     private static void clear(int [] a){
@@ -70,9 +64,9 @@ public class Merge{
             ar[i] = r.nextInt(10);
             s += ar[i]+",";
         }
-	System.out.println("Originals Arr \n" + s + "\n");
+	
 	mergesort(ar);
-	System.out.println(arr(ar));
+	
     }
 
 }

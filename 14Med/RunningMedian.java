@@ -16,12 +16,12 @@ public class RunningMedian{
 	    hasMedian = true;
 	}
 	else if (min.getSize()==max.getSize()){
+	    //System.out.println("= " + max.getSize() + "median: " + median);
 	    if (input < median) max.add(input);
 	    else min.add(input);
 	}
 	else if (max.getSize() > min.getSize()){
 	    if (input < median){
-
 		max.add(input);
 		min.add(median);
 		median = max.remove();
@@ -37,7 +37,7 @@ public class RunningMedian{
     }
     
     
-    public double getMed(){
+    public double getMedian(){
 	if (min.getSize() == max.getSize()) return median;
 	else if (min.getSize() > max.getSize()) return avg(min.peek(),median);
 	else return avg(max.peek(),median);
@@ -48,8 +48,10 @@ public class RunningMedian{
     }
 
     public String toString(){
-	return max.toString() +"\n"+ median + "\n" + min.toString();
+	return max +"\n"+ median + "\n" + min;
     }
+
+    
 
     public static void main(String[] args){
 	
@@ -57,16 +59,19 @@ public class RunningMedian{
 	m.add(8);
 	m.add(3);
 	m.add(4);
-	System.out.println(m.getMed());
+	//System.out.println(m.getMed());
         System.out.println(m+"\n");
 
 	m.add(1);
-	System.out.println(m.getMed());
+	//System.out.println(m.getMed());
 	System.out.println(m+"\n");
 	
 	m.add(6);
 	System.out.println(m+"\n");
-	System.out.println(m.getMed());
+	System.out.println(m.getMedian());
 
+	m.add(4);
+        System.out.println(m+"\n");
+        System.out.println(m.getMedian());
     }
 }
