@@ -4,7 +4,7 @@ public class Merge{
 
 
     public static void mergesort(int []a){
-	if (a.length == 1) return;
+	if (a.length == 1 || a.length == 0) return;
 	int [] left = Arrays.copyOfRange(a, 0, a.length/2);
 	int [] right= Arrays.copyOfRange(a,a.length/2, a.length);
 	//System.out.println("Left: " + arr(left));
