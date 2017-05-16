@@ -42,18 +42,19 @@ public class MyHeap{
     }
 
     private void pushDown(int index){
-	System.out.println(Math.pow((int)(Math.log(size)/Math.log(2)),2));
-	if (index < Math.pow((int)(Math.log(size)/Math.log(2)),2)){
-	    int big = getMax(index);
-	    if (mix*(heap.get(index).compareTo(heap.get(big))) < 0){
-		swap(index,big);
-		pushDown(big);
-	    }
-	}
+	
+        if (index*2 <= size){
+            intbig = getMax(index);
+            if (mix*(heap.get(index).compareTo(heap.get(big))) < 0){
+                swap(index,big);
+                pushDown(big);
+            }
+        }
+
     }
 
     private int getMax(int index){
-	if (heap.get(index*2).compareTo(heap.get(index*2+1)) > 0) return index*2;
+	if (index*2 + 1 > size || heap.get(index*2).compareTo(heap.get(index*2+1)) > 0) return index*2;
 	else return index*2+1;
     }
    
