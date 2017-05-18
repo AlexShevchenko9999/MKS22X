@@ -153,7 +153,7 @@ public class USACO {
 	    field[R1][C1] = 1;
 	    placeHolder = new int[N][M];
 	    toPlace();
-	    System.out.println(arrToString(field));
+	    //System.out.println(arrToString(field));
         }
         catch (FileNotFoundException e) {
             System.out.println("Lake not found! Please insert a valid lake file!");
@@ -196,7 +196,7 @@ public class USACO {
 		}
 	    }
 	    toField();
-	    System.out.println(arrToString(field));
+	    //System.out.println(arrToString(field));
 	}
 	//System.out.println(fieldToString());
 	return field[R2][C2];
@@ -226,6 +226,6 @@ public class USACO {
 	USACO l = new USACO();
 	
 	//for (int[] i : l.lake) System.out.println(Arrays.toString(i));
-	System.out.println(l.silver(args[0]));
+	//System.out.println(l.silver(args[0]));
     }
 }
