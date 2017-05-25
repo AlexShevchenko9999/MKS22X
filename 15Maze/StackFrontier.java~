@@ -1,0 +1,14 @@
+import java.util.*;
+public class StackFrontier implements Frontier{
+
+    private Stack<Location> s;
+
+    public void add(Location s){
+	s.push(s);
+    }
+
+    public Location next(){
+	s.pop();
+    }
+    
+}
