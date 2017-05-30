@@ -1,7 +1,7 @@
 public MazeSolver{
     
     private Maze board;
-    private bolean animate;
+    private boolean animate;//spelled bolean wrong oops
 
     public MazeSolver(String filename) {  
 	this(filename,false); 
