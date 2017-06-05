@@ -1,4 +1,4 @@
-public MazeSolver{
+public class MazeSolver{
     
     private Maze board;
     private boolean animate;//spelled bolean wrong oops
@@ -14,8 +14,8 @@ public MazeSolver{
 
 
     public String toString(){
-	if (animated) {
-	    return board.toString(75);
+	if (animate) {
+	    return board.toString(80);
 	}
 	return board.toString();
     }
@@ -30,23 +30,25 @@ public MazeSolver{
 	
 	boolean aStar = false;
 	Frontier rest;
+	Location current;
 
-	if(x == 0) rest = new StackFrontier();	
-	else if(x == 1) rest = new QueueFrontier();
-	else if(x == 2) rest = new FrontierPriorityQueue();
-	else if(x == 3){
+	if(style == 0) rest = new StackFrontier();	
+	else if(style == 1) rest = new QueueFrontier();
+	else if(style == 2) rest = new FrontierPriorityQueue();
+	else if(style == 3){
 	    rest = new FrontierPriorityQueue();
 	    aStar = true;
-	} else throw new IllegalArgumentException();
+	} 
+	else throw new IllegalArgumentException();
 	
 	rest.add(board.getStart());
 
-	while (rest.size() > 0){
-	    Location current = rest.next();
+	while (!rest.isEmpty()){
+	    current = rest.next();
 	    if (current.getDistToGoal() == 0){
 		board.set(current.getRow(),current.getCol(), 'E');
 		while (current.getPrev() != null){
-		    current = current.getPrev;
+		    current = current.getPrev();
 		    board.set(current.getRow(),current.getCol(),'.');
 		}
 		board.set(current.getRow(),current.getCol(),'S');
